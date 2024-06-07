@@ -1,0 +1,34 @@
+<div
+  class="flex items-start w-full h-full grow"
+  cdkDropListGroup
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+  (cdkDropListDropped)="dropColumn($event)"
+  [cdkDropListData]="columns()"
+>
+  @for (column of columns(); track column.id) {
+  <div cdkDrag class="p-2 mr-3 bg-gray-200 rounded w-72 shrink-0">
+    <div class="flex justify-between py-1">
+      <h3 class="ml-2 text-sm font-bold">{{ column.title }}</h3>
+      <button class="shrink-0" (click)="addColumn()">+</button>
+    </div>
+    <div
+      class="mt-2 text-sm min-h-8"
+      cdkDropListOrientation="vertical"
+      cdkDropList
+      (cdkDropListDropped)="drop($event)"
+      [cdkDropListData]="column.items"
+    >
+      @for (item of column.items; track item.id) {
+      <div
+        cdkDrag
+        class="p-2 mt-2 overflow-hidden bg-white border-b rounded shadow cursor-pointer border-x-gray-300 hover:bg-gray-100"
+      >
+        {{ item.name }}
+      </div>
+      }
+    </div>
+  </div>
+  }
+  <button class="shrink-0" (click)="addColumn()">Add Column</button>
+</div>
