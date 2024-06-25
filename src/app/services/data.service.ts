@@ -1,11 +1,32 @@
 import { Injectable, signal } from '@angular/core';
 import type { Column, Row } from '@app/types/data';
-
+const initialState: Column[] = [{
+  id: crypto.randomUUID(),
+  title: 'Todo',
+  items: [],
+  isAdding: false,
+  isEditing: false
+},
+{
+  id: crypto.randomUUID(),
+  title: 'Doing',
+  items: [],
+  isAdding: false,
+  isEditing: false
+},
+{
+  id: crypto.randomUUID(),
+  title: 'Done',
+  items: [],
+  isAdding: false,
+  isEditing: false
+}
+]
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  columns = signal<Column[]>([])
+  columns = signal<Column[]>(initialState)
 
   addColumn(title: Column['title']) {
     this.columns.update((prev) => [...prev, { id: crypto.randomUUID(), title, items: [], isAdding: false, isEditing: false }])
