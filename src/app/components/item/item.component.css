@@ -1,0 +1,5 @@
+.cont{
+  &:hover .item{
+    @apply inline-block;
+  }
+}
