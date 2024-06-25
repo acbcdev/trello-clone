@@ -5,22 +5,35 @@ import type { Column, Row } from '@app/types/data';
   providedIn: 'root'
 })
 export class DataService {
-  columns = signal<Column[]>([{ id: 1, title: 'Column 1', items: [{ name: 'Row 1', id: 1, description: 'Description 1', tags: ['tag1', 'tag2'] }] }, { id: 2, title: 'Column 2', items: [{ name: 'Row 2', id: 2, description: 'Description 2', tags: ['tag3', 'tag4'] }] }])
+  columns = signal<Column[]>([])
 
-  addColumn(column: Column) {
-    this.columns.update((prev) => [...prev, column])
+  addColumn(title: Column['title']) {
+    this.columns.update((prev) => [...prev, { id: crypto.randomUUID(), title, items: [], isAdding: false, isEditing: false }])
   }
 
-  removeColumn(id: number) {
+
+
+  removeColumn(id: Column['id']) {
     this.columns.update((prev) => prev.filter((column) => column.id !== id))
   }
   addItem(columnId: Column['id'], item: Row) {
     this.columns.update((prev) => prev.map((column) => {
       if (column.id === columnId) {
-        column.items.push(item)
+        return { ...column, items: [...column.items, item], }
       }
       return column
     }))
   }
+  editItem(columnId: Column['id'], item: Row) {
+    this.columns.update((prev) => prev.map((column) => (column.id === columnId ? { ...column, items: column.items.map((i) => i.id === item.id ? item : i) } : column)))
 
+  }
+  editColumn(id: Column['id'], title: Column['title']) {
+    this.columns.update((prev) => prev.map((column) => {
+      if (column.id === id) {
+        column.title = title
+      }
+      return column
+    }))
+  }
 }

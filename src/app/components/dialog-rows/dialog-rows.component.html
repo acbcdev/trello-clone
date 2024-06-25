@@ -1,0 +1,70 @@
+@if (infoRow()){
+<div
+  class="fixed inset-0 z-10 w-full h-full bg-zinc-900 opacity-45"
+  (click)="closeModal()"
+></div>
+<dialog
+  [open]="infoRow()?.isOpen"
+  class="fixed dialog flex inset-0 p-4 max-w-[60vw] z-20 min-h-[30%] min-w-[40vw] rounded-3xl shadow bg-zinc-700"
+>
+  <div class="flex-[0_0_80%]">
+    <div class="flex mb-5">
+      <div class="flex flex-col">
+        @if(isEditingName()){
+
+        <input
+          class="px-4 py-3 text-lg font-bold rounded-3xl bg-zinc-600 focus:outline-none"
+          type="text"
+          (dblclick)="handlerEditName()"
+          (change)="changeNameHandler()"
+          [formControl]="inputEditName"
+        />
+
+        }@else {
+        <h3
+          class="px-1 py-3 text-lg font-bold text-zinc-200"
+          (dblclick)="handlerEditName()"
+        >
+          {{ name() }}
+        </h3>
+        }
+        <!-- <div class="flex gap-2">
+          @for (tag of infoRow()?.tags; track $index) {
+          <p class="p-1 bg-red-green rounded-3xl">{{ tag }}</p>
+          }
+        </div> -->
+        <p class="text-sm text-zinc-400">in list {{ infoRow()?.list }}</p>
+      </div>
+    </div>
+    <div class="grid w-full gap-y-4 group">
+      <div class="grid mb-5">
+        <h3 class="text-lg font-semibold text-zinc-300">Description</h3>
+        @if (isEditingDescription()) {
+        <textarea
+          name=""
+          (dblclick)="handlerEditDescription()"
+          [formControl]="descriptionInput"
+          placeholder="Add Info"
+          maxlength="125"
+          (keydown.enter)="editDescription()"
+          sentences
+          cols="5"
+          rows="5"
+          class="w-full h-full px-1 py-3 mx-auto mt-3 resize-none bg-zinc-600 rounded-3xl focus:outline-none"
+        >
+        </textarea>
+        } @else if (description().length <= 0) {
+        <div (click)="handlerEditDescription()">
+          Add a more detailed description...
+        </div>
+        } @else {
+        <p class="text-sm text-gray-500" (click)="handlerEditDescription()">
+          {{ description() }}
+        </p>
+        }
+      </div>
+    </div>
+  </div>
+</dialog>
+
+}

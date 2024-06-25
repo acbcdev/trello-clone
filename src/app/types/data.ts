@@ -1,8 +1,9 @@
 export type Column = {
-  id: number
+  id: string;
   title: string;
   items: Row[];
-
+  isAdding: boolean;
+  isEditing: boolean;
 };
 
 export type Row = {
@@ -10,4 +11,8 @@ export type Row = {
   id: number;
   description: string;
   tags: string[];
+  isEditing: boolean;
+  isOpen: boolean;
 }
+
+export type TDialog = Row & { list: string, ColumnId: string }

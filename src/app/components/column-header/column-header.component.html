@@ -1,0 +1,19 @@
+@if (column().isEditing) {
+<input
+  (dblclick)="editColumnHandler(column().id)"
+  class="px-4 py-3 ml-2 text-sm font-bold rounded-3xl bg-zinc-600 focus:outline-none"
+  [formControl]="editColumnInput"
+  (change)="editNameColumn(column().id)"
+  [value]="column().title"
+/>
+} @else {
+<div class="inline-block group">
+  <h3
+    (dblclick)="editColumnHandler(column().id)"
+    class="px-4 py-3 ml-2 text-sm font-bold group"
+  >
+    {{ column().title }}
+  </h3>
+</div>
+
+}
