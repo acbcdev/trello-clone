@@ -6,7 +6,7 @@
   (cdkDropListDropped)="dropColumn($event)"
   [cdkDropListData]="columns()"
 >
-  @for (column of columns(); track column.id) {
+  @if(columns().length > 0) { @for (column of columns(); track column.id) {
   <div
     cdkDrag
     class="relative p-2 mr-3 rounded-3xl bg-zinc-700 w-72 shrink-0 group"
@@ -67,7 +67,7 @@
   <div
     class="h-64 p-2 mr-3 rounded-3xl bg-zinc-700 w-72 shrink-0 animate-pulse"
   ></div>
-  }
+  } }
   <app-add-column />
 </div>
 @if(itemDialog()?.isOpen){
