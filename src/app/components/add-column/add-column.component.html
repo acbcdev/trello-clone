@@ -1,6 +1,7 @@
 @if (isAdding()){
 <section class="p-2 bg-zinc-700 rounded-3xl">
   <input
+    addfocus
     class="p-3 shadow cursor-pointer rounded-3xl focus:outline-none bg-zinc-800"
     type="text"
     [formControl]="createInput"
@@ -28,10 +29,10 @@
 
 } @else {
 <button
-  class="p-3 mt-2 duration-150 shadow cursor-pointer rounded-3xl bg-zinc-700 hover:bg-blue-500"
+  class="mt-2 text-lg duration-150 rounded-full shadow cursor-pointer size-10 bg-zinc-700 hover:bg-blue-500"
   (click)="toogleAddColumn()"
 >
-  Add Column
+  <fa-icon [icon]="faPlus" />
 </button>
 
 }

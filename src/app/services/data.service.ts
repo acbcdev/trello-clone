@@ -26,8 +26,10 @@ const initialState: Column[] = [{
   providedIn: 'root'
 })
 export class DataService {
-  columns = signal<Column[]>(initialState)
-
+  columns = signal<Column[]>([])
+  initColumns() {
+    if (this.columns().length === 0) this.columns.set(initialState)
+  }
   addColumn(title: Column['title']) {
     this.columns.update((prev) => [...prev, { id: crypto.randomUUID(), title, items: [], isAdding: false, isEditing: false }])
   }

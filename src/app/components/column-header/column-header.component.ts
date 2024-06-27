@@ -1,17 +1,20 @@
-import { Component, computed, inject, input, output } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, inject, input, } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { AddfocusDirective } from '@app/directive/addfocus.directive';
 import { DataService } from '@app/services/data.service';
 import type { Column } from '@app/types/data';
-
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
+import { faXmark, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-column-header',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FontAwesomeModule, AddfocusDirective],
   templateUrl: './column-header.component.html',
   styleUrl: './column-header.component.css'
 })
 export class ColumnHeaderComponent {
-
+  faXmark = faXmark
+  faPenToSquare = faPenToSquare
   column = input.required<Column>()
 
   editColumnInput = new FormControl('')
@@ -34,4 +37,11 @@ export class ColumnHeaderComponent {
       return { ...column, isEditing: false }
     }))
   }
+
+  removeColumn(id: Column['id']) {
+    this.dataService.columns.update((prev) => prev.filter((column) => (
+      column.id !== id
+    )))
+  }
+
 }

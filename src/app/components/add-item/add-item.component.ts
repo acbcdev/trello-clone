@@ -1,11 +1,12 @@
 import { Component, inject, input } from '@angular/core';
 import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { AddfocusDirective } from '@app/directive/addfocus.directive';
 import { DataService } from '@app/services/data.service';
 import type { Column } from '@app/types/data';
 @Component({
   selector: 'app-add-item',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AddfocusDirective],
   templateUrl: './add-item.component.html',
   styleUrl: './add-item.component.css'
 })

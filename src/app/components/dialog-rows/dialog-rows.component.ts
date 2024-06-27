@@ -1,17 +1,21 @@
 import { Component, computed, inject, input, output, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AddfocusDirective } from '@app/directive/addfocus.directive';
 import { DataService } from '@app/services/data.service';
 
 import type { TDialog } from '@app/types/data';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-dialog-rows',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AddfocusDirective, FontAwesomeModule],
   templateUrl: './dialog-rows.component.html',
   styleUrl: './dialog-rows.component.css'
 })
 export class DialogRowsComponent {
+  faPenToSquare = faPenToSquare
+  faXmark = faXmark
   private dataService = inject(DataService)
   infoRow = input.required<TDialog | null>()
   close = output<boolean>()

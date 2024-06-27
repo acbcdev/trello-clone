@@ -1,17 +1,37 @@
 @if (column().isEditing) {
-<input
-  (dblclick)="editColumnHandler(column().id)"
-  class="px-4 py-3 ml-2 text-sm font-bold rounded-3xl bg-zinc-600 focus:outline-none"
-  [formControl]="editColumnInput"
-  (change)="editNameColumn(column().id)"
-  [value]="column().title"
-/>
+<div class="relative">
+  <input
+    (dblclick)="editColumnHandler(column().id)"
+    addfocus
+    class="px-4 py-3 ml-2 text-sm font-bold rounded-3xl bg-zinc-600 focus:outline-none"
+    [formControl]="editColumnInput"
+    (keydown.enter)="editNameColumn(column().id)"
+  />
+
+  <fa-icon
+    (click)="editColumnHandler(column().id)"
+    class="absolute p-1 cursor-pointer top-2 end-3 hover:text-red-600"
+    [icon]="faXmark"
+  ></fa-icon>
+</div>
+
 } @else {
-<div class="inline-block group">
+<div>
+  <button
+    (click)="removeColumn(column().id)"
+    class="absolute hidden p-1 end-3 top-4 group-hover:inline-block hover:text-red-500"
+  >
+    <fa-icon [icon]="faXmark"></fa-icon>
+  </button>
   <h3
     (dblclick)="editColumnHandler(column().id)"
-    class="px-4 py-3 ml-2 text-sm font-bold group"
+    class="relative px-4 py-3 ml-2 text-sm font-bold title"
   >
+    <fa-icon
+      class="absolute hidden cursor-pointer icon -left-0 hover:text-zinc-300"
+      (click)="editColumnHandler(column().id)"
+      [icon]="faPenToSquare"
+    />
     {{ column().title }}
   </h3>
 </div>

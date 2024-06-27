@@ -3,17 +3,16 @@ import { type CdkDragDrop, DragDropModule, moveItemInArray, transferArrayItem } 
 import { DataService } from '@app/services/data.service';
 import type { Column, Row, TDialog } from '@app/types/data';
 import { ColumnHeaderComponent } from '../column-header/column-header.component';
-import { AddfocusDirective } from '@app/directive/addfocus.directive';
 import { DialogRowsComponent } from '../dialog-rows/dialog-rows.component';
 import { AddItemComponent } from '../add-item/add-item.component';
 import { ItemComponent } from '../item/item.component';
 import { AddColumnComponent } from '../add-column/add-column.component';
-
-
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
+import { faXmark, faPlus } from '@fortawesome/free-solid-svg-icons'
 @Component({
   selector: 'app-columns',
   standalone: true,
-  imports: [DragDropModule, ColumnHeaderComponent, AddfocusDirective, DialogRowsComponent, AddItemComponent, ItemComponent, AddColumnComponent],
+  imports: [DragDropModule, ColumnHeaderComponent, DialogRowsComponent, AddItemComponent, ItemComponent, AddColumnComponent, FontAwesomeModule],
   templateUrl: './columns.component.html',
   styleUrl: './columns.component.css',
   styles: `
@@ -30,6 +29,8 @@ import { AddColumnComponent } from '../add-column/add-column.component';
 `
 })
 export class ColumnsComponent {
+  faXmark = faXmark
+  faPlus = faPlus
   dataService = inject(DataService)
   columns = this.dataService.columns
 
@@ -54,12 +55,13 @@ export class ColumnsComponent {
   initColumns() {
     const columns = localStorage.getItem('columns');
     if (columns) this.dataService.columns.set(JSON.parse(columns));
+    else this.dataService.initColumns();
     this.trackColumns();
   }
   platform = inject(PLATFORM_ID)
   injector = inject(Injector)
   ngOnInit() {
-    console.log(this.platform === 'web')
+    console.log(this.platform)
     if (this.platform === 'web') {
       this.initColumns()
     }
@@ -89,11 +91,6 @@ export class ColumnsComponent {
       column.id === columnId
         ? { ...column, items: column.items.filter((item) => item.id !== RowId) }
         : column
-    )))
-  }
-  removeColumn(id: Column['id']) {
-    this.dataService.columns.update((prev) => prev.filter((column) => (
-      column.id !== id
     )))
   }
 
