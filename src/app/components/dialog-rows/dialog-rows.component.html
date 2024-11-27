@@ -1,89 +1,51 @@
 @if (infoRow()){
-<div
-  class="fixed inset-0 z-10 w-full h-full bg-zinc-900 opacity-45"
-  (click)="closeModal()"
-></div>
-<dialog
-  [open]="infoRow()?.isOpen"
-  class="fixed dialog flex inset-0 p-5 max-w-[60vw] z-20 min-h-[30%] min-w-[40vw] rounded-3xl shadow bg-zinc-700"
->
+<div class="fixed inset-0 z-10 w-full h-full bg-zinc-900 opacity-45" (click)="closeModal()"></div>
+<dialog [open]="infoRow()?.isOpen"
+  class="fixed dialog flex inset-0 p-5 max-w-[60vw] z-20 min-h-[30%] min-w-[40vw] rounded-3xl shadow bg-zinc-700">
   <div class="flex-1">
     <div class="flex mb-5">
       <div class="grid">
         @if(isEditingName()){
         <div class="relative">
-          <input
-            addfocus
-            class="px-4 py-3 text-lg font-bold rounded-3xl bg-zinc-600 focus:outline-none"
-            type="text"
-            (dblclick)="handlerEditName()"
-            (change)="changeNameHandler()"
-            [formControl]="inputEditName"
-          />
-          <fa-icon
-            (click)="handlerEditName()"
-            class="absolute p-1 cursor-pointer top-3 end-3 hover:text-red-600"
-            [icon]="faXmark"
-          ></fa-icon>
+          <input addfocus class="px-4 py-3 text-lg font-bold rounded-3xl bg-zinc-600 focus:outline-none" type="text"
+            (dblclick)="handlerEditName()" (change)="changeNameHandler()" [formControl]="inputEditName" />
+          <fa-icon (click)="handlerEditName()" class="absolute p-1 cursor-pointer top-3 end-3 hover:text-red-600"
+            [icon]="faXmark"></fa-icon>
         </div>
 
         }@else {
         <div class="flex items-start justify-start group/title">
-          <h3
-            (dblclick)="handlerEditName()"
-            class="px-1 py-3 text-lg font-bold text-zinc-200"
-          >
-            {{ name() }}
+          <h3 (dblclick)="handlerEditName()" class="px-1 py-3 text-lg font-bold text-zinc-200">
+            {{ name() }} <fa-icon
+              class="hidden duration-150 cursor-pointer size-2 text-zinc-400 hover:text-zinc-100 group-hover/title:inline"
+              (click)="handlerEditName()" [icon]="faPenToSquare" />
           </h3>
-          <fa-icon
-            class="hidden cursor-pointer hover:text-zinc-300 group-hover/title:inline"
-            (click)="handlerEditName()"
-            [icon]="faPenToSquare"
-          />
         </div>
-
         }
         <p class="text-sm text-zinc-400">in list {{ infoRow()?.list }}</p>
       </div>
     </div>
     <section class="grid w-full gap-y-4 group group/dsc">
-      <div class="grid mb-5">
-        <div class="flex items-start justify-start gap-1">
-          <h3 class="text-lg font-semibold text-zinc-300">Description</h3>
-          <fa-icon
-            (click)="handlerEditDescription()"
-            [icon]="faPenToSquare"
-            class="hidden duration-100 cursor-pointer group-hover/dsc:inline text-zinc-200 hover:text-zinc-500"
-          />
-        </div>
 
-        @if (isEditingDescription()) {
-        <div class="relative">
-          <textarea
-            name=""
-            addfocus
-            (dblclick)="handlerEditDescription()"
-            [formControl]="descriptionInput"
-            placeholder="Add Info"
-            maxlength="125"
-            (keydown.enter)="editDescription()"
-            sentences
-            class="w-full h-full px-1 py-3 mx-auto mt-3 resize-none bg-zinc-600 rounded-3xl focus:outline-none"
-          >
+      <div class="flex items-start justify-start gap-1">
+        <h3 class="text-lg font-semibold text-zinc-300">Description</h3>
+        <fa-icon (click)="handlerEditDescription()" [icon]="faPenToSquare"
+          class="hidden duration-100 cursor-pointer group-hover/dsc:inline text-zinc-200 hover:text-zinc-500" />
+      </div>
+
+      @if (isEditingDescription()) {
+      <div class="relative">
+        <textarea name="" addfocus (dblclick)="handlerEditDescription()" [formControl]="descriptionInput"
+          placeholder="Add Info" maxlength="125" (keydown.enter)="editDescription()" sentences
+          class="w-full h-full px-2 py-3 mx-auto mt-3 resize-none bg-zinc-600 rounded-3xl focus:outline-none">
           </textarea>
-          <fa-icon
-            [icon]="faXmark"
-            class="absolute duration-150 cursor-pointer end-5 top-5 hover:text-red-500"
-            (click)="handlerEditDescription()"
-          />
-        </div>
+        <fa-icon [icon]="faXmark" class="absolute duration-150 cursor-pointer end-5 top-5 hover:text-red-500"
+          (click)="handlerEditDescription()" />
+      </div>
 
-        } @else if (description().length <= 0) {
-        <button
-          (click)="handlerEditDescription()"
-          class="p-2 hover:bg-zinc-600 rounded-3xl"
-        >
-          Add a more detailed description...
+      } @else if (description().length <= 0) { <button (click)="handlerEditDescription()"
+        class="p-2 hover:bg-zinc-600 rounded-3xl w-fit">
+        Add a more detailed description...
         </button>
         } @else {
         <div class="relative group/dsc" (dblclick)="handlerEditDescription()">
@@ -93,7 +55,7 @@
         </div>
 
         }
-      </div>
+
     </section>
   </div>
 </dialog>
