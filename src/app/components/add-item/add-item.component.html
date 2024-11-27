@@ -1,25 +1,14 @@
 <div class="grid p-2 mt-2 bg-zinc-600 rounded-3xl">
-  <input
-    class="p-3 shadow cursor-pointer rounded-3xl focus:outline-none bg-zinc-800"
-    type="text"
-    [formControl]="createInput"
-    (keydown.enter)="addItem(columnId())"
-    placeholder="add Item"
-    addfocus
-  />
+  <input class="px-5 py-3 shadow cursor-pointer rounded-3xl focus:outline-none bg-zinc-800" type="text"
+    [formControl]="createInput" (keydown.enter)="addItem(columnId())" placeholder="add Item" addfocus />
   <div class="flex justify-evenly">
-    <button
-      class="px-4 py-3 mt-2 duration-200 bg-blue-500 shadow cursor-pointer rounded-3xl hover:bg-green-500"
-      type="button"
-      (click)="addItem(columnId())"
-    >
+    <button class="px-4 py-3 mt-2 duration-200 bg-blue-500 shadow cursor-pointer rounded-3xl hover:bg-green-500"
+      type="button" (click)="addItem(columnId())">
       Create
     </button>
     <button
       class="px-4 py-3 mt-2 text-white duration-200 bg-transparent cursor-pointer rounded-3xl text hover:bg-red-500"
-      type="button"
-      (click)="cancelAddition(columnId())"
-    >
+      type="button" (click)="cancelAddition(columnId())">
       Cancel
     </button>
   </div>

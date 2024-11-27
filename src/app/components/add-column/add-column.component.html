@@ -1,37 +1,23 @@
 @if (isAdding()){
 <section class="p-2 bg-zinc-700 rounded-3xl">
-  <input
-    addfocus
-    class="p-3 shadow cursor-pointer rounded-3xl focus:outline-none bg-zinc-800"
-    type="text"
-    [formControl]="createInput"
-    (keydown.enter)="addColumn()"
-    placeholder="Column name"
-    addfocus
-  />
+  <input addfocus class="px-5 py-3 shadow cursor-pointer rounded-3xl focus:outline-none bg-zinc-800" type="text"
+    [formControl]="createInput" (keydown.enter)="addColumn()" placeholder="Column name" addfocus />
   <div class="flex justify-evenly">
-    <button
-      class="px-4 py-3 mt-2 duration-200 bg-blue-500 shadow cursor-pointer rounded-3xl hover:bg-green-500"
-      type="button"
-      (click)="addColumn()"
-    >
+    <button class="px-4 py-3 mt-2 duration-200 bg-blue-500 shadow cursor-pointer rounded-3xl hover:bg-green-500"
+      type="button" (click)="addColumn()">
       Create
     </button>
     <button
       class="px-4 py-3 mt-2 text-white duration-200 bg-transparent cursor-pointer rounded-3xl text hover:bg-red-500"
-      type="button"
-      (click)="isAdding.set(false)"
-    >
+      type="button" (click)="isAdding.set(false)">
       Cancel
     </button>
   </div>
 </section>
 
 } @else {
-<button
-  class="mt-2 text-lg duration-150 rounded-full shadow cursor-pointer size-10 bg-zinc-700 hover:bg-blue-500"
-  (click)="toogleAddColumn()"
->
+<button class="mt-2 text-lg duration-150 rounded-full shadow cursor-pointer size-10 bg-zinc-700 hover:bg-blue-500"
+  (click)="toogleAddColumn()">
   <fa-icon [icon]="faPlus" />
 </button>
 
