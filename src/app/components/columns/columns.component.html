@@ -1,48 +1,22 @@
-<div
-  class="flex items-start w-full h-full p-5 grow"
-  cdkDropListGroup
-  cdkDropList
-  cdkDropListOrientation="horizontal"
-  (cdkDropListDropped)="dropColumn($event)"
-  [cdkDropListData]="columns()"
->
+<div class="flex items-start w-full h-full p-5 grow" cdkDropListGroup cdkDropList cdkDropListOrientation="horizontal"
+  (cdkDropListDropped)="dropColumn($event)" [cdkDropListData]="columns()">
   @if(columns().length > 0) { @for (column of columns(); track column.id) {
   <div cdkDrag class="relative p-2 mr-3 rounded-3xl bg-zinc-700 w-72 shrink-0">
     <div>
-      <div class="flex justify-between group">
-        <app-column-header [column]="column" />
-      </div>
-      <div
-        class="mt-2 text-sm min-h-8 card-contend"
-        cdkDropListOrientation="vertical"
-        cdkDropList
-        (cdkDropListDropped)="drop($event)"
-        [cdkDropListData]="column.items"
-      >
-        @for (item of column.items; track item.id) { @if (item.isEditing) {
-        <form
-          cdkDrag
-          class="mt-2 duration-150 cursor-pointer bg-zinc-800 hover:bg-opacity-65"
-        >
-          <input class="w-full" type="text" />
-        </form>
-        }@else {
+      <app-column-header [column]="column" />
 
-        <app-item
-          (open)="toggleOpen(column.id, item.id)"
-          (remove)="removeItem(column.id, item.id)"
-          >{{ item.name }}</app-item
-        >
-
-        } }
+      <div class="mt-2 text-sm min-h-8 card-contend" cdkDropListOrientation="vertical" cdkDropList
+        (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.items">
+        @for (item of column.items; track item.id) {
+        <app-item (open)="toggleOpen(column.id, item.id)" (remove)="removeItem(column.id, item.id)">{{
+          item.name}}</app-item>
+        }
       </div>
       @if(column.isAdding){
       <app-add-item [columnId]="column.id" />
       }@else{
-      <button
-        (click)="toggleAdditionState(column.id)"
-        class="w-full p-2 mt-2 duration-150 cursor-pointer text-start bg-zinc-700 rounded-3xl hover:bg-zinc-600"
-      >
+      <button (click)="toggleAdditionState(column.id)"
+        class="w-full p-2 mt-2 duration-150 cursor-pointer text-start bg-zinc-700 rounded-3xl hover:bg-zinc-600">
         <fa-icon [icon]="faPlus" /> Add Item
       </button>
       }

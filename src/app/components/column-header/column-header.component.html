@@ -1,39 +1,27 @@
 @if (column().isEditing) {
 <div class="relative">
-  <input
-    (dblclick)="editColumnHandler(column().id)"
-    addfocus
-    class="px-4 py-3 ml-2 text-sm font-bold rounded-3xl bg-zinc-600 focus:outline-none"
-    [formControl]="editColumnInput"
-    (keydown.enter)="editNameColumn(column().id)"
-  />
+  <input (dblclick)="editColumnHandler(column().id)" addfocus
+    class="px-4 py-3 ml-2 text-sm font-bold rounded-3xl bg-zinc-600 focus:outline-none" [formControl]="editColumnInput"
+    (keydown.enter)="editNameColumn(column().id)" />
 
-  <fa-icon
-    (click)="editColumnHandler(column().id)"
-    class="absolute p-1 cursor-pointer top-2 end-3 hover:text-red-600"
-    [icon]="faXmark"
-  ></fa-icon>
+  <fa-icon (click)="editColumnHandler(column().id)" class="absolute p-1 cursor-pointer top-2 end-3 hover:text-red-600"
+    [icon]="faXmark"></fa-icon>
 </div>
 
 } @else {
-<div>
-  <button
-    (click)="removeColumn(column().id)"
-    class="absolute hidden p-1 end-3 top-4 group-hover:inline-block hover:text-red-500"
-  >
+<section class="flex items-center justify-between px-2 group/header">
+  <div class="flex items-center">
+    <fa-icon class="duration-200 opacity-0 cursor-pointer group-hover/header:opacity-100 hover:text-zinc-300"
+      (click)="editColumnHandler(column().id)" [icon]="faPenToSquare" />
+    <h3 (dblclick)="editColumnHandler(column().id)" class="relative py-3 ml-2 text-sm font-bold title">
+      {{ column().title }}
+    </h3>
+  </div>
+  <button (click)="removeColumn(column().id)"
+    class="duration-200 opacity-0 group-hover/header:opacity-100 hover:text-red-500">
     <fa-icon [icon]="faXmark"></fa-icon>
   </button>
-  <h3
-    (dblclick)="editColumnHandler(column().id)"
-    class="relative px-4 py-3 ml-2 text-sm font-bold title"
-  >
-    <fa-icon
-      class="absolute hidden cursor-pointer icon -left-0 hover:text-zinc-300"
-      (click)="editColumnHandler(column().id)"
-      [icon]="faPenToSquare"
-    />
-    {{ column().title }}
-  </h3>
-</div>
+</section>
+
 
 }
