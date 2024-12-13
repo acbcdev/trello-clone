@@ -14,13 +14,14 @@ import {
 } from '@angular/cdk/drag-drop';
 import { DataService } from '@app/services/data.service';
 import type { Column, Row, TDialog } from '@app/types/data';
-import { ColumnHeaderComponent } from '../column-header/column-header.component';
-import { DialogRowsComponent } from '../dialog-rows/dialog-rows.component';
-import { AddItemComponent } from '../add-item/add-item.component';
-import { ItemComponent } from '../item/item.component';
-import { AddColumnComponent } from '../add-column/add-column.component';
+import { ColumnHeaderComponent } from '@app/components/column-header/column-header.component';
+import { DialogRowsComponent } from '@app/components/dialog-rows/dialog-rows.component';
+import { AddItemComponent } from '@app/components/add-item/add-item.component';
+import { ItemComponent } from '@app/components/item/item.component';
+import { AddColumnComponent } from '@app/components/add-column/add-column.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faXmark, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { EditItemComponent } from '@app/components/edit-item/edit-item.component';
 @Component({
   selector: 'app-columns',
   standalone: true,
@@ -32,6 +33,7 @@ import { faXmark, faPlus } from '@fortawesome/free-solid-svg-icons';
     ItemComponent,
     AddColumnComponent,
     FontAwesomeModule,
+    EditItemComponent,
   ],
   templateUrl: './columns.component.html',
   styles: `
@@ -152,5 +154,22 @@ export class ColumnsComponent {
       }))
     );
     this.itemDialog.set(null);
+  }
+  toggleEditItem(columnId: Column['id'], itemId: Row['id']) {
+    this.dataService.columns.update((prev) =>
+      prev.map((column) => {
+        if (column.id === columnId) {
+          return {
+            ...column,
+            items: column.items.map((item) =>
+              item.id === itemId
+                ? { ...item, isEditing: !item.isEditing }
+                : item
+            ),
+          };
+        }
+        return column;
+      })
+    );
   }
 }

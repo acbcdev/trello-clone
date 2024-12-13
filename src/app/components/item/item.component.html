@@ -1,12 +1,13 @@
-<div
-  cdkDrag
-  (click)="toggleOpen()"
-  class="relative p-3 mt-2 overflow-hidden duration-150 shadow cursor-pointer rounded-3xl bg-zinc-800 hover:bg-opacity-65 cont"
->
+<article cdkDrag
+  class="relative p-3 mt-2 overflow-hidden duration-150 shadow cursor-pointer rounded-3xl bg-zinc-800 hover:bg-opacity-65 group/item"
+  (click)="toggleOpen()">
   <ng-content></ng-content>
-  <span
-    (click)="removeItem()"
-    class="absolute hidden px-1 text-sm duration-150 rounded-full hover:text-red-500 item end-5"
-    ><fa-icon [icon]="faXmark"
-  /></span>
-</div>
+  <div class="absolute hidden px-1 space-x-2 text-sm duration-150 rounded-full group-hover/item:inline end-5">
+    <span class="duration-150 hover:text-blue-500" (click)="editItem()">
+      <fa-icon [icon]="faEdit" />
+    </span>
+    <span class="duration-150 hover:text-red-500" (click)="removeItem()">
+      <fa-icon [icon]="faXmark" />
+    </span>
+  </div>
+</article>

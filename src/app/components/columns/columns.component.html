@@ -8,9 +8,17 @@
       <div class="mt-2 text-sm min-h-8 card-contend" cdkDropListOrientation="vertical" cdkDropList
         (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.items">
         @for (item of column.items; track item.id) {
-        <app-item (open)="toggleOpen(column.id, item.id)" (remove)="removeItem(column.id, item.id)">{{
+        @if(item.isEditing){
+        <app-edit-item [curentValue]="item" [columnId]="column.id"
+          (cancelEditing)="toggleEditItem(column.id, item.id)" />
+        }@else {
+        <app-item (open)="toggleOpen(column.id, item.id)" (edit)="toggleEditItem(column.id, item.id)"
+          (remove)="removeItem(column.id, item.id)">{{
           item.name}}</app-item>
+
         }
+        }
+
       </div>
       @if(column.isAdding){
       <app-add-item [columnId]="column.id" />

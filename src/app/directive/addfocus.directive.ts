@@ -2,13 +2,11 @@ import { Directive, ElementRef, inject } from '@angular/core';
 
 @Directive({
   selector: '[addfocus]',
-  standalone: true
+  standalone: true,
 })
 export class AddfocusDirective {
-  el = inject(ElementRef)
+  el = inject(ElementRef);
   ngAfterViewInit() {
-    this.el.nativeElement.focus()
+    this.el.nativeElement.focus();
   }
-
-
 }
