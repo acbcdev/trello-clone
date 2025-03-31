@@ -1,7 +1,9 @@
 <article cdkDrag
-  class="relative p-3 mt-2 overflow-hidden duration-150 shadow cursor-pointer rounded-3xl bg-zinc-800 hover:bg-opacity-65 group/item"
+  class="relative px-5 py-3 mt-2 overflow-hidden duration-150 shadow cursor-pointer rounded-3xl bg-zinc-800 hover:bg-opacity-65 group/item"
   (click)="toggleOpen()">
-  <ng-content></ng-content>
+  <span (click)="editItem()" class="hover:underline">
+    <ng-content></ng-content>
+  </span>
   <div class="absolute hidden px-1 space-x-2 text-sm duration-150 rounded-full group-hover/item:inline end-5">
     <span class="duration-150 hover:text-blue-500" (click)="editItem()">
       <fa-icon [icon]="faEdit" />
