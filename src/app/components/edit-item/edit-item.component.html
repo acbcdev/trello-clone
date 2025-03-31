@@ -1,7 +1,7 @@
 <article class="relative flex">
   <input type="text" [formControl]='editItemInput' [placeholder]="curentValue().name" [value]="curentValue().name"
     addfocus (keydown.enter)="editItem()" (change)="editItem()"
-    class="relative w-full p-3 mt-2 overflow-hidden duration-150 shadow cursor-pointer focus:bg-zinc-600 focus:outline-none rounded-3xl bg-zinc-500 hover:bg-opacity-65 group/item" />
+    class="relative w-full px-5 py-3 mt-2 overflow-hidden duration-150 shadow cursor-pointer focus:bg-zinc-600 focus:outline-none rounded-3xl bg-zinc-500 hover:bg-opacity-65 group/item" />
   <span class="absolute duration-150 right-5 top-5 hover:text-red-500" (click)="cancelEdit()">
     <fa-icon [icon]="faXmark" />
   </span>
